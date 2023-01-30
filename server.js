@@ -23,18 +23,9 @@ app.get('/hextobase64/:key/:secret', (req, res) => {
   API_SECRET = req.params.secret;
   const signatureHelper = new signature(API_KEY,API_SECRET);
   const signatureResult = signatureHelper.calculate();
-  let result = signatureResult;
-  console.log("result " + result.Authorization);
-  res.send({result});
-})
-
-app.get('/headers/:key/:secret', (req, res) => {
-  API_KEY = req.params.key;
-  API_SECRET = req.params.secret;
-  const signatureHelper = new signature(API_KEY,API_SECRET);
-  const signatureResult = signatureHelper.calculate();
   const headers = signatureResult.getHTTPHeaders();
   let result = headers;
+  console.log("result " + result.Authorization);
   res.send({result});
 })
 
