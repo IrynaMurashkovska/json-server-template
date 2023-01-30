@@ -23,26 +23,18 @@ app.get('/hextobase64/:key/:secret', (req, res) => {
   API_SECRET = req.params.secret;
   const signatureHelper = new signature(API_KEY,API_SECRET);
   const signatureResult = signatureHelper.calculate();
+  let result = signatureResult;
+  console.log("result " + result.Authorization);
+  res.send({result});
+})
+
+app.get('/headers/:key/:secret', (req, res) => {
+  API_KEY = req.params.key;
+  API_SECRET = req.params.secret;
+  const signatureHelper = new signature(API_KEY,API_SECRET);
+  const signatureResult = signatureHelper.calculate();
   const headers = signatureResult.getHTTPHeaders();
   let result = headers;
-
-  request.get(
-    {
-        url: 'https://api.modulrfinance.com/api/customers',
-        json: true,
-        headers: signatureResult.getHTTPHeaders()
-    },
-    (err, res, data) => {
-        if (err) {
-            console.error('Error calling API', err);
-        } else if (res.statusCode !== 200) {
-            console.error('Unsuccessful API call, code: ', res.statusCode, ', messsage: ', res.statusMessage, ', body: ', data);
-        } else {
-            console.log('OK response from API, body: ', data);
-        }
-    });
-
-  console.log("result " + result.Authorization);
   res.send({result});
 })
 
