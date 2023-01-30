@@ -9,6 +9,7 @@
     "seed": "cp db/seeds.json db/db.json"
   },
   "dependencies": {
+    "btoa": "^1.2.1",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "encodeuri-safe": "^0.0.1",

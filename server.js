@@ -1,7 +1,8 @@
 const express = require('express')
 const app = express()
-const CryptoJS = require("crypto-js");
-var encodeURISafe = require('encodeuri-safe');
+//const CryptoJS = require("crypto-js");
+//const encodeURISafe = require('encodeuri-safe');
+const btoa = require('btoa');
 
 app.get('/calculate/:num1/:num2', (req, res) => {
     let num1 = req.params.num1;
