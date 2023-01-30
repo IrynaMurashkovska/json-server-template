@@ -1,8 +1,14 @@
+'use strict';
+
 const express = require('express')
 const app = express()
-//const CryptoJS = require("crypto-js");
-//const encodeURISafe = require('encodeuri-safe');
-const btoa = require('btoa');
+//const crypto = require("crypto-js");
+////const encodeURISafe = require('encodeuri-safe');
+//const btoa = require('btoa');
+const signature = require(`./signature`);
+
+let API_KEY = "test";
+let API_SECRET = "test=";
 
 app.get('/calculate/:num1/:num2', (req, res) => {
     let num1 = req.params.num1;
@@ -14,12 +20,13 @@ app.get('/calculate/:num1/:num2', (req, res) => {
     res.send({result});
 })
 
-app.get('/hextobase64/:hmac', (req, res) => {
-  let hmac = req.params.hmac;
-  console.log("hmac " + hmac);
-  const hmacEncoded = hexToBase64(hmac.toString());
-  let result = hmacEncoded;
-  console.log('hmacEncoded ' + hmacEncoded)
+app.get('/hextobase64/:key/:secret', (req, res) => {
+  API_KEY = req.params.key;
+  API_SECRET = req.params.secret;
+  const signatureHelper = new signature(API_KEY,API_SECRET);
+  const signatureResult = signatureHelper.calculate();
+  let result = signatureResult;
+  console.log("result " + result);
   res.send({result});
 })
 
@@ -27,9 +34,3 @@ app.listen(3000, () => {
     console.log('Server running on port 3000')
 })
 
-function hexToBase64(hexstring) {
-  console.log("hexToBase64");
-  return btoa(hexstring.match(/\w{2}/g).map(function(a) {
-      return String.fromCharCode(parseInt(a, 16));
-  }).join(""));
-}
