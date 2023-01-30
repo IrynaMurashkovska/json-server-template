@@ -2,9 +2,7 @@
 
 const express = require('express')
 const app = express()
-//const crypto = require("crypto-js");
-////const encodeURISafe = require('encodeuri-safe');
-//const btoa = require('btoa');
+const request = require('request');
 const signature = require(`./signature`);
 
 let API_KEY = "test";
@@ -25,8 +23,26 @@ app.get('/hextobase64/:key/:secret', (req, res) => {
   API_SECRET = req.params.secret;
   const signatureHelper = new signature(API_KEY,API_SECRET);
   const signatureResult = signatureHelper.calculate();
-  let result = signatureResult;
-  console.log("result " + result);
+  const headers = signatureResult.getHTTPHeaders();
+  let result = headers;
+
+  request.get(
+    {
+        url: 'https://api.modulrfinance.com/api/customers',
+        json: true,
+        headers: signatureResult.getHTTPHeaders()
+    },
+    (err, res, data) => {
+        if (err) {
+            console.error('Error calling API', err);
+        } else if (res.statusCode !== 200) {
+            console.error('Unsuccessful API call, code: ', res.statusCode, ', messsage: ', res.statusMessage, ', body: ', data);
+        } else {
+            console.log('OK response from API, body: ', data);
+        }
+    });
+
+  console.log("result " + result.Authorization);
   res.send({result});
 })
 
