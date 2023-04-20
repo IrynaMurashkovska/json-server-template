@@ -61,6 +61,20 @@ class Result {
     getSignature(){
         return this.encodedSignature;
     }
+
+    getAutorisations(){
+        return this.authorisation;
+    }
+
+    getHTTPHeadersNotificationd(){
+        return {   
+            'accept': 'application/json',
+            'content-type': 'application/json',
+            'Date': this.timestamp,
+            'x-mod-nonce': this.nonce,
+            'Authorization': this.authorisation
+        }
+    }
 }
 
 module.exports = Signature, Result;
