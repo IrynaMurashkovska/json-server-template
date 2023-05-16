@@ -20,6 +20,19 @@ app.get('/calculate/:num1/:num2', (req, res) => {
     res.send({result});
 })
 
+app.get('/customers/:key/:secret', (req, res) => {
+  API_KEY = req.params.key;
+  API_SECRET = req.params.secret;
+  //const signatureHelper = new signature(API_KEY,API_SECRET);
+  //const signatureResult = signatureHelper.calculate();
+  //const headers = signatureResult.getHTTPHeaders();
+  const customerNotificationHelper = new customer_notification(API_KEY, API_SECRET);
+  const result = customerNotificationHelper.getCustomers();
+  console.log("result " + result);
+  res.send({result});
+
+})
+
 app.get('/hextobase64/:key/:secret', (req, res) => {
   API_KEY = req.params.key;
   API_SECRET = req.params.secret;
@@ -32,11 +45,11 @@ app.get('/hextobase64/:key/:secret', (req, res) => {
 })
 
 app.get('/setupnotification/:key/:secret/:cid', (req, res) => {
-  let API_KEY1 = req.params.key;
+  API_KEY = req.params.key;
   API_SECRET = req.params.secret;
   CUSTOMER_ID = req.params.cid;
-  const customerNotificationHelper = new customer_notification(CUSTOMER_ID);
-  const result = customerNotificationHelper.setUpNotification(API_KEY1,API_SECRET, CUSTOMER_ID);
+  const customerNotificationHelper = new customer_notification(API_KEY, API_SECRET);
+  const result = customerNotificationHelper.setUpNotification(CUSTOMER_ID);
   console.log("result " + result.Authorization);
   res.send({result});
 })

@@ -3,21 +3,20 @@
 const signature = require(`./signature`);
 
 class CustomerNotification {
-    constructor (cid)
+    constructor (key, secret)
     {
-        this.cid = cid;
+        this.key = key;
+        this.secret = secret;
         console.debug(`this.cid ${this.cid}`);
+        console.debug(`this.key ${this.key}`);
+        console.debug(`this.secret ${this.secret}`);
     }
 
-    setUpNotification(key, secret, cid)
+    setUpNotification(cid)
     {
-        let API_KEY = key;
-        let API_SECRET = secret;
         let CUSTOMER_ID = cid;
-        console.debug(`API_KEY ${API_KEY}`);
-        console.debug(`API_SECRET ${API_SECRET}`);
         console.debug(`CUSTOMER_ID ${CUSTOMER_ID}`);
-        const signatureHelper = new signature(API_KEY,API_SECRET);
+        const signatureHelper = new signature(this.key,this.secret);
         const signatureResult = signatureHelper.calculate();
         const headersOPt = signatureResult.getHTTPHeadersNotificationd();
        // let result = headers;
@@ -44,6 +43,27 @@ class CustomerNotification {
             .then(response => console.log(response))
             .catch(err => console.error(err));
     }
+
+    getCustomers()
+    {
+
+        const signatureHelper = new signature(this.key,this.secret);
+        const signatureResult = signatureHelper.calculate();
+        const headersOPt = signatureResult.getHTTPHeaders();
+        console.log(`headersOPt ${JSON.stringify(headersOPt)}`);
+        const options = {method: 'GET', headers: headersOPt};
+        console.log(`options ${JSON.stringify(options)}`);
+
+        fetch('https://api-sandbox.modulrfinance.com/api-sandbox-token/customers', options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+
+        console.log(`response ${JSON.stringify(response)}`);
+
+    }
+
+
 
 }
 module.exports = CustomerNotification;
