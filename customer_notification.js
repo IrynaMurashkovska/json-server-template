@@ -57,16 +57,16 @@ class CustomerNotification {
         let resp = null;
         fetch('https://api.modulrfinance.com/api/customers', options)
             .then((response) => {
+                console.log(`response1 ${JSON.stringify(response)}`);
                 this.contacts = response.json();
             })
             .then((body) => console.log(body))
             .catch((err) => console.error(err));
 
-        console.log(`response ${JSON.stringify(resp)}`);
+        console.log(`response2 ${JSON.stringify(response)}`);
+        console.log(`this.contacts ${JSON.stringify(this.contacts)}`);
         return this.contacts;
     }
-
-
 
 }
 module.exports = CustomerNotification;
