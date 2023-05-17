@@ -17,20 +17,17 @@ app.get('/calculate/:num1/:num2', (req, res) => {
     console.log('num1 ' + num1)
     console.log('num2 ' + num2)
     console.log('Sum ' + result)
-  //  res.send({result});
-    res.json({result});
+    res.send({result});
 })
 
 app.get('/customers/:key/:secret', (req, res) => {
   API_KEY = req.params.key;
   API_SECRET = req.params.secret;
-  //const signatureHelper = new signature(API_KEY,API_SECRET);
-  //const signatureResult = signatureHelper.calculate();
-  //const headers = signatureResult.getHTTPHeaders();
   const customerNotificationHelper = new customer_notification(API_KEY, API_SECRET);
   const result = customerNotificationHelper.getCustomers();
   console.log("result " + result);
-  res.send({result});
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify({result}));
 
 })
 
