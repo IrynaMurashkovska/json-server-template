@@ -56,7 +56,7 @@ class CustomerNotification {
 
         const option1 = {method: 'GET', headers: {accept: 'application/json', Authorization: headersOPt}};
 
-        fetch('https://api-sandbox.modulrfinance.com/api-sandbox-token/customers', option1)
+        fetch('https://api.modulrfinance.com/api/customers', option1)
             .then(response => response.json())
             .then(response => {
                 console.log("response1: ");
