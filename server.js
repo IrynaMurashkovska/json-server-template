@@ -17,7 +17,8 @@ app.get('/calculate/:num1/:num2', (req, res) => {
     console.log('num1 ' + num1)
     console.log('num2 ' + num2)
     console.log('Sum ' + result)
-    res.send({result});
+  //  res.send({result});
+    res.json({result});
 })
 
 app.get('/customers/:key/:secret', (req, res) => {
