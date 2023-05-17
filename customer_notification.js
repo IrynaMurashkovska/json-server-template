@@ -8,9 +8,9 @@ class CustomerNotification {
     {
         this.key = key;
         this.secret = secret;
-        console.debug(`this.cid ${this.cid}`);
         console.debug(`this.key ${this.key}`);
         console.debug(`this.secret ${this.secret}`);
+        this.contacts = null;
     }
 
     setUpNotification(cid)
@@ -47,7 +47,6 @@ class CustomerNotification {
 
     getCustomers()
     {
-
         const signatureHelper = new signature(this.key,this.secret);
         const signatureResult = signatureHelper.calculate();
         const headersOPt = signatureResult.getHTTPHeaders();
@@ -55,12 +54,16 @@ class CustomerNotification {
         const options = {method: 'GET', headers: headersOPt};
         console.log(`options ${JSON.stringify(options)}`);
 
+        let resp = null;
         fetch('https://api.modulrfinance.com/api/customers', options)
-            .then(response => response.json())
-            .then(response => console.log(response))
-            .catch(err => console.error(err));
+            .then((response) => {
+                this.contacts = response.json();
+            })
+            .then((body) => console.log(body))
+            .catch((err) => console.error(err));
 
-        console.log(`response ${JSON.stringify(response)}`);
+        console.log(`response ${JSON.stringify(resp)}`);
+        return this.contacts;
     }
 
 
