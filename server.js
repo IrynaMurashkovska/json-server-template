@@ -27,7 +27,7 @@ app.get('/customers/:key/:secret', (req, res) => {
   const result = customerNotificationHelper.getCustomers();
   console.log("result " + result);
   res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify({result}));
+  res.send(JSON.stringify(result));
 
 })
 
