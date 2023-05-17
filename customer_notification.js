@@ -53,23 +53,6 @@ class CustomerNotification {
         console.log(`headersOPt ${JSON.stringify(headersOPt)}`);
         const options = {method: 'GET', headers: headersOPt};
         console.log(`options ${JSON.stringify(options)}`);
-/*
-        //let resp = null;
-        fetch('https://api.modulrfinance.com/api/customers', options)
-            .then((response) => {
-                console.log(`response1 ${JSON.stringify(response)}`);
-            })
-            .then((response) => {
-                console.log(response);
-                console.log(`body ${JSON.stringify(response)}`);
-                this.contacts = response;
-            })
-            .catch((err) => console.error(err));
-
-        //console.log(`response2 ${JSON.stringify(response)}`);
-        console.log(`this.contacts ${JSON.stringify(this.contacts)}`);
-        return this.contacts;
-        */
 
         const option1 = {method: 'GET', headers: {accept: 'application/json', Authorization: headersOPt}};
 
@@ -78,13 +61,11 @@ class CustomerNotification {
             .then(response => {
                 console.log("response1: ");
                 console.log(response);
-                this.contacts = response();
+                this.contacts = response;
             })
             .catch(err => console.error(err));
             
         console.log("!1----------");
-        console.log(response);
-        console.log("!2----------");
         console.log(this.contacts);
     }
 
