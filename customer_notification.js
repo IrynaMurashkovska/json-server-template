@@ -1,6 +1,7 @@
 'use strict';
 
 const signature = require(`./signature`);
+const fetch = require("node-fetch");
 
 class CustomerNotification {
     constructor (key, secret)
@@ -54,10 +55,10 @@ class CustomerNotification {
         const options = {method: 'GET', headers: headersOPt};
         console.log(`options ${JSON.stringify(options)}`);
 
-        fetch('https://api-sandbox.modulrfinance.com/api-sandbox-token/customers', options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
+        fetch('https://api.modulrfinance.com/api/customers', options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
 
         console.log(`response ${JSON.stringify(response)}`);
 
