@@ -27,7 +27,7 @@ class CustomerNotification {
             method: 'POST',
             headers: headersOPt,
             body: JSON.stringify({
-              destinations: ['https://nebeus.onrender.com/calculate/3/2'],
+              destinations: ['https://nebeus.onrender.com/hook'],
               config: {
                 retry: true,
                 secret: 'sdtrraz4wedsTq4xrfdcvazdsE4Tfdfd',

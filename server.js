@@ -5,10 +5,13 @@ const app = express()
 const request = require('request');
 const signature = require(`./signature`);
 const customer_notification = require(`./customer_notification`);
+const bodyParser = require("body-parser")
 
 let API_KEY = "test";
 let API_SECRET = "test=";
 let CUSTOMER_ID = "test=";
+
+app.use(bodyParser.json());
 
 app.get('/calculate/:num1/:num2', (req, res) => {
     let num1 = req.params.num1;
@@ -18,6 +21,28 @@ app.get('/calculate/:num1/:num2', (req, res) => {
     console.log('num2 ' + num2)
     console.log('Sum ' + result)
     res.send({result});
+})
+
+app.use(bodyParser.json())
+app.post("/hook", (req, res) => {
+    let customers = req;  
+    console.log(`customers: ${JSON.stringify(req.body)}`);
+    console.log(`customers: ${JSON.stringify(req.headers)}`);
+    console.log(`query: ${JSON.stringify(req.query)}`);
+    console.log("current list", customers)
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(customers.query));
+})
+
+app.get('/webhooktest', (req, res) => {
+  console.log(`Webhook Data1:: ${JSON.stringify(req)}`);
+  //console.log(`Webhook Data:: ${JSON.stringify(req)}`);
+  //result = req;
+  let result = new Object();
+  result = req;
+  console.log(`test1:: ${result.body}`);
+  res.setHeader('Content-Type', 'application/json');
+  res.send({result});
 })
 
 app.get('/customers/:key/:secret', (req, res) => {
