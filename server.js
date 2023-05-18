@@ -86,6 +86,22 @@ app.get('/setupnotification/:key/:secret/:cid', (req, res) => {
   });
 })
 
+app.post('/updatenotification/:key/:secret/:cid/:notid', (req, res) => {
+  API_KEY = req.params.key;
+  API_SECRET = req.params.secret;
+  CUSTOMER_ID = req.params.cid;
+  let notification_id = req.params.notid
+  const customerNotificationHelper = new customer_notification(API_KEY, API_SECRET);
+  const result = customerNotificationHelper.updateNotification(CUSTOMER_ID, notification_id);
+  let notification;
+  notification = result.then((data) => {
+    console.log(`notification: ${JSON.stringify(data)}`);
+    //console.log("result " + result.Authorization);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(data));
+  });
+})
+
 app.listen(3000, () => {
     console.log('Server running on port 3000')
 })
