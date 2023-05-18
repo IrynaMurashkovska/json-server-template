@@ -52,8 +52,13 @@ app.get('/setupnotification/:key/:secret/:cid', (req, res) => {
   CUSTOMER_ID = req.params.cid;
   const customerNotificationHelper = new customer_notification(API_KEY, API_SECRET);
   const result = customerNotificationHelper.setUpNotification(CUSTOMER_ID);
-  console.log("result " + result.Authorization);
-  res.send({result});
+  let notification;
+  notification = result.then((data) => {
+    console.log(`notification: ${JSON.stringify(data)}`);
+    //console.log("result " + result.Authorization);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(data));
+  });
 })
 
 app.listen(3000, () => {
