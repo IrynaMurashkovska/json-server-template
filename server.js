@@ -31,7 +31,11 @@ app.post("/hook", (req, res) => {
     console.log(`query: ${JSON.stringify(req.query)}`);
     console.log("current list", customers)
     //------------------------------------------------------
-    
+    console.log("------------------------------");
+    console.log(`body:\n ${JSON.stringify(req.body)}`);
+    console.log("------------------------------");
+    console.log(`payer:\n ${JSON.stringify(req.body.payer)}`);
+    console.log("------------------------------");
     //------------------------------------------------------
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(customers.query));
