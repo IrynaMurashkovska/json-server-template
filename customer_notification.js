@@ -110,5 +110,25 @@ class CustomerNotification {
             .catch(err => console.error(err));
         return customers;
     }
+
+    async InvokeZohoFunction(body)
+    {
+        const options = {
+            method: 'GET',
+            type: 'GET',
+            parameters:{"inf": body}
+        };
+        //console.log(`options ${JSON.stringify(options)}`);
+
+        let customers = await fetch('https://www.zohoapis.eu/crm/v2/functions/modulr_webhook_notification_1/actions/execute?auth_type=apikey&zapikey=1003.2cb250d52697ca90ff6c9707870289bb.61ad36913f64b99109702d31ede9dc65', options)
+            .then(response => response.json())
+            .then(response => {
+                console.log(`TEST ZOHO: ${JSON.stringify(response)}`);
+                this.contacts = response;
+                return response;
+            })
+            .catch(err => console.error(err));
+        return customers;
+    }
 }
 module.exports = CustomerNotification;

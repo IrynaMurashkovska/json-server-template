@@ -5,7 +5,8 @@ const app = express()
 const request = require('request');
 const signature = require(`./signature`);
 const customer_notification = require(`./customer_notification`);
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
+const CustomerNotification = require('./customer_notification');
 
 let API_KEY = "test";
 let API_SECRET = "test=";
@@ -36,6 +37,8 @@ app.post("/hook", (req, res) => {
     console.log("------------------------------");
     console.log(`payer:\n ${JSON.stringify(req.body.payer)}`);
     console.log("------------------------------");
+    let customerNotificationHelper = new customer_notification("","");
+    customerNotificationHelper.InvokeZohoFunction(req.body);
     //------------------------------------------------------
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(customers.query));
