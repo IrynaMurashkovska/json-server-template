@@ -33,7 +33,8 @@ class CustomerNotification {
                 secret: 'sdtrraz4wedsTq4xrfdcvazdsE4Tfdfd',
                 hmacAlgorithm: 'hmac-sha256'
               },
-              channel: 'WEBHOOK'
+              channel: 'WEBHOOK',
+              type: 'PAYIN'
             })
           };
         console.log(`options ${JSON.stringify(options)}`);
