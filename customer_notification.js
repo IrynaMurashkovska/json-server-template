@@ -21,7 +21,13 @@ class CustomerNotification {
         const signatureResult = signatureHelper.calculate();
         const headersOPt = signatureResult.getHTTPHeaders();
         console.log(`headersOPt ${JSON.stringify(headersOPt)}`);
-        const options = {method: 'GET', headers: headersOPt};
+        //const options = {method: 'GET', headers: headersOPt};
+
+        const options = {
+            method: 'POST',
+            headers: headersOPt,
+            body: JSON.stringify({destinations: ['http://localhost:3000/calculate/3/2'], channel: 'WEBHOOK', type: 'PAYIN', retry: true, secret: 'sdtrraz4wedsTq4xrfdcvazdsE4Tfdfd', hmacAlgorithm: 'hmac-sha256'})
+          };
         console.log(`options ${JSON.stringify(options)}`);
 
         let customer_notification =  await fetch(`https://api.modulrfinance.com/api/customers/${CUSTOMER_ID}/notifications`, options)
