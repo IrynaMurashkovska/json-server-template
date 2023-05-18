@@ -19,7 +19,7 @@ class CustomerNotification {
         console.debug(`CUSTOMER_ID ${CUSTOMER_ID}`);
         const signatureHelper = new signature(this.key,this.secret);
         const signatureResult = signatureHelper.calculate();
-        const headersOPt = signatureResult.getHTTPHeaders();
+        const headersOPt = signatureResult.getHTTPHeadersNotificationd();
         console.log(`headersOPt ${JSON.stringify(headersOPt)}`);
         //const options = {method: 'GET', headers: headersOPt};
 
