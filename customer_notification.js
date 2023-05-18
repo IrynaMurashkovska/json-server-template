@@ -29,7 +29,8 @@ class CustomerNotification {
             .then(response => {
                 let notif = response;
                 //console.log(response)
-                console.log(`customers: ${JSON.stringify(response)}`);
+                console.log(`customers notification: ${JSON.stringify(response)}`);
+                return notif;
             })
             .catch(err => console.error(err));
         return customer_notification;
