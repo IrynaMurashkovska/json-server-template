@@ -26,7 +26,15 @@ class CustomerNotification {
         const options = {
             method: 'POST',
             headers: headersOPt,
-            body: JSON.stringify({destinations: ['http://localhost:3000/calculate/3/2'], channel: 'WEBHOOK', type: 'PAYIN', retry: true, secret: 'sdtrraz4wedsTq4xrfdcvazdsE4Tfdfd', hmacAlgorithm: 'hmac-sha256'})
+            body: JSON.stringify({
+              destinations: ['http://localhost:3000/calculate/3/2'],
+              config: {
+                retry: true,
+                secret: 'sdtrraz4wedsTq4xrfdcvazdsE4Tfdfd',
+                hmacAlgorithm: 'hmac-sha256'
+              },
+              channel: 'WEBHOOK'
+            })
           };
         console.log(`options ${JSON.stringify(options)}`);
 
