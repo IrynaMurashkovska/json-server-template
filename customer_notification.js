@@ -71,7 +71,8 @@ class CustomerNotification {
                 hmacAlgorithm: 'hmac-sha256'
               },
               channel: 'WEBHOOK',
-              type: 'PAYIN'
+              type: 'PAYIN',
+              status: 'ACTIVE'
             })
           };
         console.log(`options ${JSON.stringify(options)}`);
