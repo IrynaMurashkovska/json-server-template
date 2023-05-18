@@ -45,7 +45,7 @@ class CustomerNotification {
             .catch(err => console.error(err));
     }
 
-    getCustomers()
+    async getCustomers()
     {
         const signatureHelper = new signature(this.key,this.secret);
         const signatureResult = signatureHelper.calculate();
@@ -54,20 +54,15 @@ class CustomerNotification {
         const options = {method: 'GET', headers: headersOPt};
         console.log(`options ${JSON.stringify(options)}`);
 
-        const option1 = {method: 'GET', headers: {accept: 'application/json', Authorization: headersOPt}};
-
-        fetch('https://api.modulrfinance.com/api/customers', option1)
+        let customers = await fetch('https://api.modulrfinance.com/api/customers', options)
             .then(response => response.json())
             .then(response => {
-                console.log("response1: ");
-                console.log(response);
+                console.log(`customers: ${JSON.stringify(response)}`);
                 this.contacts = response;
+                return response;
             })
             .catch(err => console.error(err));
-            
-        console.log("!1----------");
-        console.log(this.contacts);
+        return customers;
     }
-
 }
 module.exports = CustomerNotification;

@@ -9,6 +9,7 @@
     "seed": "cp db/seeds.json db/db.json"
   },
   "dependencies": {
+    "asyncawait": "^3.0.0",
     "btoa": "^1.2.1",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
@@ -19,7 +20,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "nodemon": "1.18.4"
+    "nodemon": "^2.0.22"
   },
   "author": "Ian Hollander",
   "license": "ISC"

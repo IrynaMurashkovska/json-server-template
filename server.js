@@ -25,9 +25,13 @@ app.get('/customers/:key/:secret', (req, res) => {
   API_SECRET = req.params.secret;
   const customerNotificationHelper = new customer_notification(API_KEY, API_SECRET);
   const result = customerNotificationHelper.getCustomers();
-  console.log("server result: " + result);
-  res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify(result));
+  let customers;
+  result.then((data) => {
+    customers = data;  
+    console.log(`customers: ${JSON.stringify(customers)}`);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(customers));
+  })
 
 })
 
