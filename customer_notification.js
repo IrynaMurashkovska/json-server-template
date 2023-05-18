@@ -26,7 +26,8 @@ class CustomerNotification {
             method: 'POST',
             headers: headersOPt,
             body: JSON.stringify({
-              destinations: ['https://nebeus.onrender.com/hook'],
+                //destinations: ['https://nebeus.onrender.com/hook'],
+                destinations: ['https://www.zohoapis.eu/crm/v2/functions/modulr_webhook_notification_1/actions/execute?auth_type=apikey&zapikey=1003.2cb250d52697ca90ff6c9707870289bb.61ad36913f64b99109702d31ede9dc65'],
               config: {
                 retry: true,
                 secret: 'sdtrraz4wedsTq4xrfdcvazdsE4Tfdfd',
@@ -64,7 +65,8 @@ class CustomerNotification {
             method: 'PUT',
             headers: headersOPt,
             body: JSON.stringify({
-              destinations: ['https://nebeus.onrender.com/hook'],
+                destinations: ['https://www.zohoapis.eu/crm/v2/functions/modulr_webhook_notification_1/actions/execute?auth_type=apikey&zapikey=1003.2cb250d52697ca90ff6c9707870289bb.61ad36913f64b99109702d31ede9dc65'],
+                //destinations: ['https://nebeus.onrender.com/hook'],
               config: {
                 retry: true,
                 secret: 'sdtrraz4wedsTq4xrfdcvazdsE4Tfdfd',
