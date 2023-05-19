@@ -66,7 +66,7 @@ app.get('/hextobase64/:key/:secret', (req, res) => {
   const signatureResult = signatureHelper.calculate();
   const headers = signatureResult.getHTTPHeaders();
   let result = headers;
-  console.log("Autorization done");
+  //console.log("Autorization done");
   res.send({result});
 })
 
