@@ -38,7 +38,7 @@ app.post("/hook", (req, res) => {
     console.log(`Payer:\n ${JSON.stringify(req.body.Payer)}`);
     console.log("------------------------------");
     let customerNotificationHelper = new customer_notification("","");
-    customerNotificationHelper.InvokeZohoFunction(req.body);
+    customerNotificationHelper.InvokeZohoFunction(JSON.stringify(req.body));
     //------------------------------------------------------
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(customers.query));
