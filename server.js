@@ -44,17 +44,6 @@ app.post("/hook", (req, res) => {
     res.send(JSON.stringify(customers.query));
 })
 
-app.get('/webhooktest', (req, res) => {
-  console.log(`Webhook Data1:: ${JSON.stringify(req)}`);
-  //console.log(`Webhook Data:: ${JSON.stringify(req)}`);
-  //result = req;
-  let result = new Object();
-  result = req;
-  console.log(`test1:: ${result.body}`);
-  res.setHeader('Content-Type', 'application/json');
-  res.send({result});
-})
-
 app.get('/customers/:key/:secret', (req, res) => {
   API_KEY = req.params.key;
   API_SECRET = req.params.secret;
@@ -77,7 +66,7 @@ app.get('/hextobase64/:key/:secret', (req, res) => {
   const signatureResult = signatureHelper.calculate();
   const headers = signatureResult.getHTTPHeaders();
   let result = headers;
-  console.log("result " + result.Authorization);
+  console.log("Autorization done");
   res.send({result});
 })
 

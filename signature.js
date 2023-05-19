@@ -10,8 +10,6 @@ class Signature {
         }
         this.apikey = apiKey;
         this.apiSecret = apiSecret;
-        console.debug(`this.apikey ${this.apikey}`);
-        console.debug(`this.apiSecret ${this.apiSecret}`);
     }
 
 
@@ -26,12 +24,10 @@ class Signature {
 
         // format raw signature
         const signature = `date: ${timestamp}\nx-mod-nonce: ${nonce}`;
-        console.debug(`Raw signature string is:\n-----------\n${signature}\n-----------`);
     
         // sign and encode signature
         const signatureSigned = crypto.HmacSHA1(signature, this.apiSecret);
         const signatureEncoded = encodeURIComponent(crypto.enc.Base64.stringify(signatureSigned));
-        console.debug(`Signed signature is [${signatureSigned}] and encoded is [${signatureEncoded}]`);
     
         return new Result(this.apikey, timestamp, nonce, signatureEncoded);
     }
