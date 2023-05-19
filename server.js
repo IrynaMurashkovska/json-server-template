@@ -96,6 +96,21 @@ app.get('/setupnotification/:key/:secret/:cid', (req, res) => {
   });
 })
 
+app.get('/setupnotificationout/:key/:secret/:cid', (req, res) => {
+  API_KEY = req.params.key;
+  API_SECRET = req.params.secret;
+  CUSTOMER_ID = req.params.cid;
+  const customerNotificationHelper = new customer_notification(API_KEY, API_SECRET);
+  const result = customerNotificationHelper.setUpNotificationPayOut(CUSTOMER_ID);
+  let notification;
+  notification = result.then((data) => {
+    console.log(`notification: ${JSON.stringify(data)}`);
+    //console.log("result " + result.Authorization);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(data));
+  });
+})
+
 app.post('/updatenotification/:key/:secret/:cid/:notid', (req, res) => {
   API_KEY = req.params.key;
   API_SECRET = req.params.secret;
