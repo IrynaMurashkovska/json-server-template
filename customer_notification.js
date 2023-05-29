@@ -169,6 +169,13 @@ class CustomerNotification {
         return customer_notification;
     }
 
+    {
+        let CUSTOMER_ID = cid;
+        console.debug(`CUSTOMER_ID ${CUSTOMER_ID}`);
+        const signatureHelper = new signature(this.key,this.secret);
+        const signatureResult = signatureHelper.calculate();
+        const headersOPt = signatureResult.getHTTPHeadersNotificationd();
+        console.log(`headersOPt ${JSON.stringify(headersOPt)}`);
     async getCustomers()
     {
         const signatureHelper = new signature(this.key,this.secret);
