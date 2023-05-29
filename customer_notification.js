@@ -169,6 +169,7 @@ class CustomerNotification {
         return customer_notification;
     }
 
+    async getNotificationCustomers(cid)
     {
         let CUSTOMER_ID = cid;
         console.debug(`CUSTOMER_ID ${CUSTOMER_ID}`);
@@ -176,6 +177,25 @@ class CustomerNotification {
         const signatureResult = signatureHelper.calculate();
         const headersOPt = signatureResult.getHTTPHeadersNotificationd();
         console.log(`headersOPt ${JSON.stringify(headersOPt)}`);
+
+        const options = {
+            method: 'GET',
+            headers: headersOPt
+          };
+        console.log(`options ${JSON.stringify(options)}`);
+
+        let customer_notification =  await fetch(`https://api.modulrfinance.com/api/customers/${CUSTOMER_ID}/notifications`, options)
+            .then(response => response.json())
+            .then(response => {
+                let notif = response;
+                //console.log(response)
+                console.log(`customers notification: ${JSON.stringify(response)}`);
+                return notif;
+            })
+            .catch(err => console.error(err));
+        return customer_notification;
+    }
+
     async getCustomers()
     {
         const signatureHelper = new signature(this.key,this.secret);
