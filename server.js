@@ -27,10 +27,10 @@ app.get('/calculate/:num1/:num2', (req, res) => {
 app.use(bodyParser.json())
 app.post("/hook", (req, res) => {
     let customers = req;  
-    console.log(`customers: ${JSON.stringify(req.body)}`);
-    console.log(`customers: ${JSON.stringify(req.headers)}`);
-    console.log(`query: ${JSON.stringify(req.query)}`);
-    console.log("current list", customers)
+   // console.log(`customers: ${JSON.stringify(req.body)}`);
+   // console.log(`customers: ${JSON.stringify(req.headers)}`);
+   // console.log(`query: ${JSON.stringify(req.query)}`);
+  //  console.log("current list", customers)
     //------------------------------------------------------
     console.log("------------------------------");
     console.log(`body:\n ${JSON.stringify(req.body)}`);
@@ -39,8 +39,8 @@ app.post("/hook", (req, res) => {
     console.log("------------------------------");
     let customerNotificationHelper = new customer_notification("","");
     let inf = req.body;
-    console.log(`inf send:\n ${JSON.stringify(inf)}`);
-    console.log("------------------------------");
+    //console.log(`inf send:\n ${JSON.stringify(inf)}`);
+    //console.log("------------------------------");
     customerNotificationHelper.InvokeZohoFunction(inf);
     //------------------------------------------------------
     res.setHeader('Content-Type', 'application/json');
@@ -110,6 +110,22 @@ app.post('/updatenotification/:key/:secret/:cid/:notid', (req, res) => {
   let notification_id = req.params.notid
   const customerNotificationHelper = new customer_notification(API_KEY, API_SECRET);
   const result = customerNotificationHelper.updateNotification(CUSTOMER_ID, notification_id);
+  let notification;
+  notification = result.then((data) => {
+    console.log(`notification: ${JSON.stringify(data)}`);
+    //console.log("result " + result.Authorization);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(data));
+  });
+})
+
+app.post('/updatenotificationpayout/:key/:secret/:cid/:notid', (req, res) => {
+  API_KEY = req.params.key;
+  API_SECRET = req.params.secret;
+  CUSTOMER_ID = req.params.cid;
+  let notification_id = req.params.notid
+  const customerNotificationHelper = new customer_notification(API_KEY, API_SECRET);
+  const result = customerNotificationHelper.updateNotificationPayOut(CUSTOMER_ID, notification_id);
   let notification;
   notification = result.then((data) => {
     console.log(`notification: ${JSON.stringify(data)}`);
